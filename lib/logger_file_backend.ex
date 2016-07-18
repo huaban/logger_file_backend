@@ -43,6 +43,10 @@ defmodule LoggerFileBackend do
     end
   end
 
+  def handle_event(:flush, state) do
+    {:ok, state}
+  end
+
   def handle_info({:rotate, path}, %{path: path, count: count} = state) do
     Util.rotate_logfile(path, count)
     schedule_rotation(path)
